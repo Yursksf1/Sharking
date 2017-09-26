@@ -1,0 +1,29 @@
+
+{% load staticfiles %}
+
+<div class="ui inverted huge borderless fixed fluid menu">
+  <a class="header item" href="{#% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="Mountain View" style="width:70px;height:50px;"> SHARKING  </a>
+  <div class="right menu">
+    <div class="item">
+      <div class="ui small input">
+        <input placeholder="Search..." />
+      </div>
+    </div>
+    {% if request.user.is_authenticated %}
+    <div class="ui dropdown item">
+     {{user.username}} <i class="dropdown icon"></i>
+     <div class="menu">
+       <a class="item" href="{#% url  'myprofile:detail' %}">Perfil de Usuario</a>
+       {% if request.user.is_staff %}
+          <a class="item" href="{#% url 'admin:index' %}">Administración</a>
+          {% else %}
+          <a class="item" href="">Mis Solicitudes</a>
+       {% endif %}
+       <a class="item" href="{#% url 'auth_logout' %}">Salir</a>
+     </div>
+   </div>
+    {% else %}
+    <a class="item" href="{#% url 'auth_login' %}">Ingresar</a>
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+<html>
+  <head>
+
+    {% block head %}
+    <meta charset="utf-8" />
+    <title>{% block title %}AMB{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/semantic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+
+    {% endblock %}
+  </head>
+  <body>
+
+
+<!---->
+{% include 'menu.html' %}
+
+    <div class="ui grid">
+      <div class="row">
+      {% include 'sidebar.html' %}
+
+        <div class="column" id="contenido">
+
+                {% block content %}
+                {% endblock %}
+        </div>
+      </div>
+    </div>
+    <style type="text/css">
+      body {
+        display: relative;
+      }
+
+      #sidebar {
+        position: fixed;
+        top: 51.8px;
+        left: 0;
+        bottom: 0;
+        width: 18%;
+        background-color: #f5f5f5;
+        padding: 0px;
+      }
+      #sidebar .ui.menu {
+        margin: 2em 0 0;
+        font-size: 16px;
+      }
+      #sidebar .ui.menu > a.item {
+        color: #337ab7;
+        border-radius: 0 !important;
+      }
+      #sidebar .ui.menu > a.item.active {
+        background-color: #337ab7;
+        color: white;
+        border: none !important;
+      }
+      #sidebar .ui.menu > a.item:hover {
+        background-color: #4f93ce;
+        color: white;
+      }
+
+      #contenido {
+        margin-left: 19%;
+        margin-right: : 19%;
+        width: 81%;
+        margin-top: 3em;
+        padding-left: 3em;
+        float: left;
+      }
+      #content > .ui.grid {
+        padding-right: 4em;
+        padding-bottom: 3em;
+      }
+      #content h1 {
+        font-size: 36px;
+      }
+      #content .ui.divider:not(.hidden) {
+        margin: 0;
+      }
+      #content table.ui.table {
+        border: none;
+      }
+      #content table.ui.table thead th {
+        border-bottom: 2px solid #eee !important;
+      }
+
+      .ui.inverted.menu {
+          background: #00B5AD;
+      }
+      #sidebar .ui.menu > a.item {
+        color: #00B5AD;
+      }
+
+      #sidebar .ui.menu > a.item.active {
+          background-color: #00B5AD;
+          color: white;
+          border: none !important;
+      }
+    </style>
+    {% block tail %}
+
+    <script src="{% static 'dist/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/semantic.js' %}"></script>
+    <script>
+      $(".page-{% block page %}unknown{% endblock %}").addClass("active");
+      $(".ui.dropdown").dropdown();
+      $(".ui.form").form();
+      //$(".ui.date.calendar").calendar({ type: "date" });
+      //$(".ui.datetime.calendar").calendar({ type: "datetime" });
+      //$(".ui.time.calendar").calendar({ type: "time" });
+    </script>
+    {% endblock %}
+
+  </body>
+</html>
